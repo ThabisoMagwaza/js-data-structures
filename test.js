@@ -1,4 +1,16 @@
-const { decimalToBinary, baseConverter } = require('./modules/algorithms/decimalToBinary');
+const Queue = require('./data-structures/queue')
 
-console.log(decimalToBinary(10));
-console.log(baseConverter(8)(100345));
+const queue = new Queue();
+console.log(queue.isEmpty());
+
+queue.enqueue('John')
+queue.enqueue('Jack')
+console.log(queue.toString());
+
+queue.enqueue('Camila')
+console.log(queue.toString());
+console.log(queue.size());
+console.log(queue.isEmpty());
+queue.dequeue()
+queue.dequeue()
+console.log(queue.toString());

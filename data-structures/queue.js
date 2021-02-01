@@ -30,7 +30,7 @@ module.exports = function Queue() {
   this.dequeue = function dequeue() {
     if (this.isEmpty()) return undefined;
     const res = items[lowestCount];
-    delete items.lowestCount;
+    delete items[lowestCount];
     lowestCount++;
     return res;
   };
