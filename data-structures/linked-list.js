@@ -64,7 +64,7 @@ module.exports = function LinkeList( equalsFunction = defaultEquals ) {
 		if( index < 0 || index > count - 1 ) return null;
 
 		let node = head;
-		for( let i = 0; i <= index; i++ ) {
+		for( let i = 0; i < index; i++ ) {
 			node = node.next;
 		}
 		return node;
@@ -86,14 +86,15 @@ module.exports = function LinkeList( equalsFunction = defaultEquals ) {
      */
 	this.insert = function insert( element, index ) {   
 		if( index < 0 || index > count - 1 ) return false;
-        
+		
+		const node = new Node( element );
+		
 		if( index === 0 ) {
-			this.push( element );
+			node.next = head;
+			head = node;
 			return true;
 		}
 
-		const node = new Node( element );
-        
 		const previous = this.getElementAt( index - 1 );
 		node.next = previous.next;
 		previous.next = node;
