@@ -15,6 +15,7 @@
         "ecmaVersion": 11
     },
     "rules": {
+        "space-in-parens": ["error", "always"],
         "indent": [
             "error",
             "tab"
