@@ -5,7 +5,7 @@ module.exports.Node = class Node {
 	}
 };
 
-module.exports.DoublyNode = class DoublyNode extends Node {
+module.exports.DoublyNode = class DoublyNode extends this.Node {
 	constructor( element ) {
 		super( element );
 		this.prev = null;

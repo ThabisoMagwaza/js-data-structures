@@ -62,7 +62,7 @@ module.exports = class LinkeList {
 	/**
      * Returns the element at the give index
      * @param {number} index
-     * @returns {Node}  
+     * @returns {Node} element or null if element is not found
      */
 	getElementAt( index ) {
 		if( index < 0 || index > this.count - 1 ) return null;
@@ -153,7 +153,10 @@ module.exports = class LinkeList {
 	 */
 	toString() {
 		let current = this.head;
-		let str = `${current.element}`;
+
+		if( !current ) return '';
+
+		let str =  `${current.element}`;
 		current = current.next;
 		while( current ) {
 			str = `${str},${current.element}`;
