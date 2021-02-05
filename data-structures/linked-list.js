@@ -96,6 +96,7 @@ module.exports = class LinkeList {
 		if( index === 0 ) {
 			node.next = this.head;
 			this.head = node;
+			this.count++;
 			return true;
 		}
 
