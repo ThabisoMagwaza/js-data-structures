@@ -47,7 +47,19 @@ module.exports = class BinarySearchTree {
      * @returns {boolean} true if key is found, false otherwise
      */
 	search( key ) {
-        
+		return this.searchNode( this.root,key );
+	}
+
+	searchNode( node, key ){
+		if( node === null ){
+			return false;
+		}else if( this.compareFn( key, node.key ) === Compare.LESS_THAN ){
+			return this.searchNode( node.left, key );
+		}else if( this.compareFn( key, node.key ) === Compare.GREATER_THAN ){
+			return this.searchNode( node.right, key );
+		}else{
+			return true;
+		}
 	}
 
 	/**
@@ -66,7 +78,7 @@ module.exports = class BinarySearchTree {
 	}
 
 	/**
-     * Traverse the tree using post-order traversal
+     * Traverse the tree using pre-order traversal
      */
 	preOrderTraverse( callback ) {
 		this.preOrderTraverseNode( this.root, callback );
@@ -79,19 +91,57 @@ module.exports = class BinarySearchTree {
 			this.preOrderTraverseNode( node.right, callback );
 		}
 	}
+	/**
+     * Traverse the tree using post-order traversal
+     */
+	postOrderTraverse( callback ) {
+		this.postOrderTraverseNode( this.root, callback );
+	}
+
+	postOrderTraverseNode( node,callback ){
+		if( node !== null ){
+			this.postOrderTraverseNode( node.left, callback );
+			this.postOrderTraverseNode( node.right, callback );
+			callback( node.key );
+		}
+	}
 
 	/**
      * @returns Min key/value in the tree
      */
 	min(){
+		return this.minNode( this.root );
+	}
 
+	minNode( node ){
+		let current = node;
+		while( current !== null && current.left !== null ){
+			current = current.left;
+		}
+		return current.key;
+	}
+
+	findMinNode( node ){
+		let current = node;
+		while( current !== null && current.left !== null ){
+			current = current.left;
+		}
+		return current;
 	}
 
 	/**
      * @returns Max key/value in the tree
      */
 	max(){
-        
+		return this.maxNode( this.root );
+	}
+
+	maxNode( node ) {
+		let current = node;
+		while( current !== null && current.right !== null ){
+			current = current.right;
+		}
+		return current.key;
 	}
 
 	/**
@@ -99,7 +149,42 @@ module.exports = class BinarySearchTree {
      * @param {*} key 
      */
 	remove( key ) {
+		this.root = this.removeNode( this.root, key );
+	}
 
+	removeNode( node,key ) {
+		if( node === null ){
+			return null;
+		}
+
+		if( this.compareFn( key,node.key ) === Compare.LESS_THAN ){
+			node.left = this.removeNode( node.left, key );
+			return node;
+		}else  if( this.compareFn( key,node.key ) === Compare.GREATER_THAN ){
+			node.right = this.removeNode( this.right, key );
+			return node;
+		}else {
+			// key is equal to node.item
+			// case 1
+			if( node.left === null && node.right === null ) {
+				node = null;
+				return node;
+			}
+			// case 2
+			if( node.left === null ) {
+				node = node.right;
+				return node;
+			}else if( node.right === null ) {
+				node = node.left;
+				return node;
+			}
+
+			// case 3
+			const aux = this.findMinNode( node.right );
+			node.key = aux.key;
+			node.right = this.removeNode( node.right, aux.key );
+			return node;
+		}
 	}
 
 };
