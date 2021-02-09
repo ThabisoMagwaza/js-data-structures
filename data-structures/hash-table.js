@@ -1,5 +1,5 @@
 const defaultToStringFn = require( '../utils/defaultToString' );
-const ValuePair = require( '../models/dictionary-models' );
+const {ValuePair} = require( '../models/dictionary-models' );
 
 module.exports = class HashTable {
 	constructor( toStringFn = defaultToStringFn ) {
@@ -14,7 +14,7 @@ module.exports = class HashTable {
      */
 	put( key, value ) {
 		if( !key || !value ) return false;
-		const pos = this.hasCode( key );
+		const pos = this.hashCode( key );
 		this.table[pos] = new ValuePair( key,value );
 		return true;
 	}
@@ -54,7 +54,7 @@ module.exports = class HashTable {
         
 	}
     
-	hasCode( key ) {
+	hashCode( key ) {
 		return this.loseLoseHashCode( key );
 	}
 };
