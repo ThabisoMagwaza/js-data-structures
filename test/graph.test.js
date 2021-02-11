@@ -30,6 +30,5 @@ test( 'toString displays graph string', () => {
 	graph.addEdge( 'B','D' );
 	graph.addEdge( 'D','A' );
 
-	console.log( graph.toString() );
 	expect( graph.toString() ).toBe( 'A -> B,C,D\nB -> A,D\nC -> A\nD -> B,A' );
 } );
