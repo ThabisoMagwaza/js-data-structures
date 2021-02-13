@@ -4,7 +4,8 @@
   "description": "Collection of JS data Structures",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "testDP": "jest --verbose ./dynamic-programing"
   },
   "repository": {
     "type": "git",
